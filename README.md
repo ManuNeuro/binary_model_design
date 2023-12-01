@@ -1,6 +1,6 @@
 # Random Boolean Network Model
  This is a model of a Random Boolean Network (BRN) reservoir, with input and readout. 
- The folder `simulation` contains four jupyter notebooks to reproduce the experiments performed in the following [article](https://manuneuro.github.io/EmmanuelCalvet/assets/publications/2023_article_emmanuel_calvet_submited.pdf):
+ The folder `simulation` contains four jupyter notebooks to reproduce the experiments performed in the following [article](https://manuneuro.github.io/EmmanuelCalvet/assets/publications/2023-12-01_article_emmanuel_calvet_submitted.pdf):
 
  1. `free_evolution`
  2. `attractor_statistics`
