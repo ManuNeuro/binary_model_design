@@ -1485,14 +1485,14 @@ def balance(mu, sigma):
 def add_balance(df, name=None, path=None, N=None, K=None, 
                 W=None, T=None, d=None, col='stdWeights'):
 
-    # if 'balance' not in df.columns:
     if col not in df.columns:
         col = 'stdWeight'
-    b = [balance(W, sigma, 'analytic') for sigma in df[col].values]
+    b = [balance(W, sigma) for sigma in df[col].values]
     df['balance'] = b
+
     if name is not None:
         print('SAVE', path, name)
-        save_df(df, name, path, N=N, K=K, W=W, T=T, d=d)
+        simple_save_df(df, name, path, N=N, K=K, W=W, T=T, d=d)
         
     return df
 
@@ -1674,14 +1674,12 @@ def save_df(filePath, dic_result, index_name=None, save=True):
         df = pd.DataFrame.from_dict(dic_result)
     
     
-    for col in df.columns:
-        if 'Unnamed' in str(col):
-            df.pop(col)
-        elif '.' in str(col):
-            df.pop(col)
-            
     if index_name is not None:
         df.index.names = [index_name]
+
+    for col in df.columns:
+        if 'Unnamed' in str(col):
+            df = df.drop(col, axis=1)
 
     if save:
         # Remove if duplicate columns
@@ -1712,7 +1710,17 @@ def load_df(name, data_path, N=None, K=None, W=None, T=None, d=None, sigma=None)
     full_path = os.path.join(data_path, full_name)
     print(full_path)
     df = pd.read_csv(full_path + '.csv')
+    for col in df.columns:
+        if 'Unnamed' in str(col):
+            df = df.drop(col, axis=1)
     return df
+
+def simple_save_df(df, name, data_path, N=None, K=None, W=None, T=None, d=None, sigma=None):
+    spec_activities = name_format(N=N, K=K, W=W, d=d, T=T, sigma=sigma)
+    full_name = name + spec_activities
+    full_path = os.path.join(data_path, full_name)
+    print(full_path)
+    df.to_csv(full_path + '.csv')
 
 # %% main
 
