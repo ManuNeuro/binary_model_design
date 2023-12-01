@@ -9,7 +9,7 @@
 # Datas
 
 Since the time of computation can be long, the folder `results` also includes the csv 
-of all experiments used to produce all plots in the aforementioned article. 
+of experiments used to produce some of the plots in the aforementioned article. 
 
 # Analysis of the data
 
